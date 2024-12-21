@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('whiteboards', function (Blueprint $table) {
             $table->id();
+            $table->string('identifier');
+            $table->unique('identifier');
+            $table->string('name');
+            $table->foreignId('owner_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
